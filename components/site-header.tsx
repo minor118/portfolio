@@ -1,32 +1,43 @@
 "use client"
 
 import { useEffect, useRef, useState, type KeyboardEvent } from "react"
+import Link from "next/link"
+import { usePathname } from "next/navigation"
 import { Menu, Play, X } from "lucide-react"
 import { navItems, profile } from "@/lib/portfolio-data"
 import { cn } from "@/lib/utils"
 
+const pageIds: Record<string, string> = {
+  "/career": "career",
+  "/works": "works",
+}
+
 export function SiteHeader() {
+  const pathname = usePathname()
+  const pageId = pageIds[pathname]
   const [open, setOpen] = useState(false)
-  const [activeId, setActiveId] = useState(navItems[0].id)
+  const [sectionId, setSectionId] = useState(navItems[0].id)
+  const activeId = pageId ?? sectionId
   const [selected, setSelected] = useState(0)
   const itemRefs = useRef<(HTMLAnchorElement | null)[]>([])
   const buttonRef = useRef<HTMLButtonElement>(null)
 
   useEffect(() => {
+    if (pageId) return
     const sections = navItems
       .map((item) => document.getElementById(item.id))
       .filter((el): el is HTMLElement => el !== null)
     const observer = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
-          if (entry.isIntersecting) setActiveId(entry.target.id)
+          if (entry.isIntersecting) setSectionId(entry.target.id)
         }
       },
       { rootMargin: "-45% 0px -50% 0px" },
     )
     sections.forEach((section) => observer.observe(section))
     return () => observer.disconnect()
-  }, [])
+  }, [pageId])
 
   const openMenu = () => {
     const index = Math.max(
@@ -71,8 +82,8 @@ export function SiteHeader() {
   return (
     <header className="fixed inset-x-0 top-0 z-50">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 md:px-6">
-        <a
-          href="#top"
+        <Link
+          href="/"
           className="group flex -rotate-2 items-center gap-2 border-[3px] border-foreground bg-foreground px-3 py-1.5 shadow-hard-sm transition-colors hover:bg-card"
         >
           <span className="font-display text-sm text-primary-foreground transition-colors group-hover:text-foreground">
@@ -81,7 +92,7 @@ export function SiteHeader() {
           <span className="hidden bg-accent px-1.5 text-xs font-bold text-accent-foreground sm:inline">
             PORTFOLIO
           </span>
-        </a>
+        </Link>
 
         <button
           ref={buttonRef}
@@ -119,15 +130,15 @@ export function SiteHeader() {
                   const isCurrent = activeId === item.id
                   return (
                     <li key={item.id}>
-                      <a
+                      <Link
                         ref={(el) => {
                           itemRefs.current[index] = el
                         }}
-                        href={`#${item.id}`}
+                        href={item.href}
                         onClick={() => closeMenu(false)}
                         onMouseEnter={() => setSelected(index)}
                         onFocus={() => setSelected(index)}
-                        aria-current={isCurrent ? "location" : undefined}
+                        aria-current={isCurrent ? (pageId ? "page" : "location") : undefined}
                         className={cn(
                           "clip-slant flex items-center gap-3 px-3 py-2.5 outline-none transition-all duration-150",
                           isSelected
@@ -154,7 +165,7 @@ export function SiteHeader() {
                             NOW
                           </span>
                         )}
-                      </a>
+                      </Link>
                     </li>
                   )
                 })}

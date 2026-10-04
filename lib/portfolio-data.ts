@@ -10,13 +10,13 @@ export const profile = {
   ],
 }
 
-export type NavItem = { id: string; en: string; ja: string }
+export type NavItem = { id: string; en: string; ja: string; href: string }
 
 export const navItems: NavItem[] = [
-  { id: "top", en: "TOP", ja: "トップ" },
-  { id: "about", en: "ABOUT", ja: "自己紹介・スキル" },
-  { id: "career", en: "CAREER", ja: "経歴・職歴" },
-  { id: "works", en: "WORKS", ja: "作品・実績" },
+  { id: "top", en: "TOP", ja: "トップ", href: "/#top" },
+  { id: "about", en: "ABOUT", ja: "自己紹介・スキル", href: "/#about" },
+  { id: "career", en: "CAREER", ja: "経歴・職歴", href: "/career" },
+  { id: "works", en: "WORKS", ja: "作品・実績", href: "/works" },
 ]
 
 export type Skill = { name: string; level: number }

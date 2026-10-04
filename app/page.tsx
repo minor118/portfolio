@@ -1,10 +1,9 @@
 import { AboutSection } from "@/components/about-section"
 import { BootOverlay } from "@/components/boot-overlay"
-import { CareerSection } from "@/components/career-section"
 import { HeroSection } from "@/components/hero-section"
+import { PageLinks } from "@/components/page-links"
 import { SiteFooter } from "@/components/site-footer"
 import { SiteHeader } from "@/components/site-header"
-import { WorksSection } from "@/components/works-section"
 
 export default function Page() {
   return (
@@ -14,8 +13,7 @@ export default function Page() {
       <main className="overflow-x-clip">
         <HeroSection />
         <AboutSection />
-        <CareerSection />
-        <WorksSection />
+        <PageLinks ids={["career", "works"]} />
       </main>
       <SiteFooter />
     </>
