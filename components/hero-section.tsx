@@ -1,4 +1,5 @@
-import { ArrowDown } from "lucide-react"
+import Link from "next/link"
+import { ArrowRight } from "lucide-react"
 import { profile } from "@/lib/portfolio-data"
 
 function Knob({ label }: { label: string }) {
@@ -82,13 +83,13 @@ export function HeroSection() {
         <p className="font-display -rotate-2 bg-foreground px-5 py-3 text-xl text-primary-foreground shadow-hard md:text-3xl text-balance text-center">
           {profile.catchphrase}
         </p>
-        <a
-          href="#about"
+        <Link
+          href="/career"
           className="group flex items-center gap-2 border-[3px] border-foreground bg-card px-5 py-2 font-display text-sm text-foreground shadow-hard-sm transition-all hover:rotate-2 hover:bg-foreground hover:text-primary-foreground"
         >
           START
-          <ArrowDown className="size-4 transition-transform group-hover:translate-y-0.5" aria-hidden="true" />
-        </a>
+          <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
+        </Link>
       </div>
     </section>
   )

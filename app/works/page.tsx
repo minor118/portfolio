@@ -15,7 +15,7 @@ export default function WorksPage() {
       <SiteHeader />
       <main id="top" className="overflow-x-clip pt-8">
         <WorksSection />
-        <PageLinks ids={["career", "about"]} />
+        <PageLinks ids={["career", "top"]} />
       </main>
       <SiteFooter />
     </>

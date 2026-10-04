@@ -1,6 +1,7 @@
 import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
 import { Dela_Gothic_One, Noto_Sans_JP } from 'next/font/google'
+import { BootOverlay } from '@/components/boot-overlay'
 import './globals.css'
 
 const dela = Dela_Gothic_One({
@@ -53,6 +54,7 @@ export default function RootLayout({
   return (
     <html lang="ja" className={`${dela.variable} ${noto.variable} bg-background`}>
       <body className="antialiased">
+        <BootOverlay />
         {children}
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
