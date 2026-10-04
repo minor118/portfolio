@@ -1,0 +1,215 @@
+.header {
+  position: fixed;
+  inset-inline: 0;
+  top: 0;
+  z-index: 50;
+}
+
+.bar {
+  display: flex;
+  max-width: 72rem;
+  align-items: center;
+  justify-content: space-between;
+  margin-inline: auto;
+  padding: 0.75rem 1rem;
+}
+
+/* ==========================================================================
+   Logo
+   ========================================================================== */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  rotate: -2deg;
+  padding: 0.375rem 0.75rem;
+  border: 3px solid var(--foreground);
+  background-color: var(--foreground);
+  box-shadow: var(--shadow-hard-sm);
+  transition: background-color 150ms var(--ease);
+}
+.logo:hover {
+  background-color: var(--card);
+}
+.logoName {
+  font-family: var(--font-display);
+  letter-spacing: 0.01em;
+  font-size: 0.875rem;
+  line-height: 1.4286;
+  color: var(--primary-foreground);
+  transition: color 150ms var(--ease);
+}
+.logo:hover .logoName {
+  color: var(--foreground);
+}
+.logoBadge {
+  display: none;
+  padding-inline: 0.375rem;
+  background-color: var(--accent);
+  font-size: 0.75rem;
+  line-height: 1.3333;
+  font-weight: 700;
+  color: var(--accent-foreground);
+}
+
+/* ==========================================================================
+   Menu toggle
+   ========================================================================== */
+.menuButton {
+  display: flex;
+  width: 3rem;
+  height: 3rem;
+  align-items: center;
+  justify-content: center;
+  border: 3px solid var(--foreground);
+  background-color: var(--foreground);
+  box-shadow: var(--shadow-hard-sm);
+  color: var(--primary-foreground);
+  transition: all 150ms var(--ease);
+}
+.menuButton:hover {
+  rotate: -6deg;
+  background-color: var(--card);
+  color: var(--foreground);
+}
+.menuIcon {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+/* ==========================================================================
+   Command menu (RPG-style window)
+   ========================================================================== */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes slide-in {
+  from {
+    opacity: 0;
+    transform: translateX(2.5rem);
+  }
+}
+
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: -10;
+  background-color: color-mix(in oklab, var(--foreground) 40%, transparent);
+  animation: fade-in 200ms ease;
+}
+
+.menu {
+  position: absolute;
+  top: 5rem;
+  right: 1rem;
+  width: min(22rem, calc(100vw - 2rem));
+  animation: slide-in 300ms ease;
+}
+
+.window {
+  rotate: -1deg;
+  border: 4px solid var(--foreground);
+  background-color: var(--foreground);
+  box-shadow: var(--shadow-hard-lg);
+}
+
+.titlebar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.375rem 1rem;
+  background-color: var(--primary-foreground);
+  color: var(--foreground);
+}
+.titlebarTitle {
+  font-family: var(--font-display);
+  letter-spacing: 0.01em;
+  font-size: 0.875rem;
+  line-height: 1.4286;
+}
+.titlebarHint {
+  font-size: 0.75rem;
+  line-height: 1.3333;
+  font-weight: 700;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 0.75rem;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.625rem 0.75rem;
+  outline: none;
+  clip-path: var(--clip-slant);
+  color: var(--card);
+  transition: all 150ms var(--ease);
+}
+.item[data-selected='true'] {
+  translate: 0.5rem 0;
+  background-color: var(--primary-foreground);
+  color: var(--foreground);
+}
+
+.cursor {
+  width: 1rem;
+  height: 1rem;
+  flex-shrink: 0;
+  fill: currentColor;
+  opacity: 0;
+  transition: opacity 150ms var(--ease);
+}
+.item[data-selected='true'] .cursor {
+  opacity: 1;
+}
+
+.itemEn {
+  font-family: var(--font-display);
+  letter-spacing: 0.01em;
+  font-size: 1.5rem;
+  line-height: 1;
+}
+.itemJa {
+  font-size: 0.75rem;
+  line-height: 1.3333;
+  font-weight: 700;
+}
+
+.now {
+  margin-left: auto;
+  padding-inline: 0.375rem;
+  background-color: var(--accent);
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.05em;
+  color: var(--accent-foreground);
+}
+.item[data-selected='true'] .now {
+  background-color: var(--foreground);
+  color: var(--primary-foreground);
+}
+
+/* ==========================================================================
+   Responsive
+   ========================================================================== */
+@media (min-width: 40rem) {
+  .logoBadge {
+    display: inline;
+  }
+}
+
+@media (min-width: 48rem) {
+  .bar {
+    padding-inline: 1.5rem;
+  }
+  .menu {
+    right: 1.5rem;
+  }
+}

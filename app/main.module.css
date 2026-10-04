@@ -1,0 +1,9 @@
+/* <main> wrapper shared by every page */
+.main {
+  overflow-x: clip;
+}
+
+/* Sub pages have no hero, so leave room under the fixed header */
+.subpage {
+  padding-top: 2rem;
+}

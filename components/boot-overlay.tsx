@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect } from "react"
+import styles from "./boot-overlay.module.css"
 
 const BOOT_DURATION_MS = 1700
 
@@ -15,11 +16,8 @@ export function BootOverlay() {
   }, [])
 
   return (
-    <div
-      className="boot-overlay pointer-events-none fixed inset-0 z-[100] flex items-center justify-center bg-foreground"
-      aria-hidden="true"
-    >
-      <div className="boot-line h-0.5 w-full bg-card" />
+    <div className={styles.overlay} aria-hidden="true">
+      <div className={styles.line} />
     </div>
   )
 }

@@ -5,7 +5,7 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { Menu, Play, X } from "lucide-react"
 import { navItems, profile } from "@/lib/portfolio-data"
-import { cn } from "@/lib/utils"
+import styles from "./site-header.module.css"
 
 const pageIds: Record<string, string> = {
   "/career": "career",
@@ -80,18 +80,11 @@ export function SiteHeader() {
   }
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50">
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 md:px-6">
-        <Link
-          href="/"
-          className="group flex -rotate-2 items-center gap-2 border-[3px] border-foreground bg-foreground px-3 py-1.5 shadow-hard-sm transition-colors hover:bg-card"
-        >
-          <span className="font-display text-sm text-primary-foreground transition-colors group-hover:text-foreground">
-            {profile.nameEn}
-          </span>
-          <span className="hidden bg-accent px-1.5 text-xs font-bold text-accent-foreground sm:inline">
-            PORTFOLIO
-          </span>
+    <header className={styles.header}>
+      <div className={styles.bar}>
+        <Link href="/" className={styles.logo}>
+          <span className={styles.logoName}>{profile.nameEn}</span>
+          <span className={styles.logoBadge}>PORTFOLIO</span>
         </Link>
 
         <button
@@ -100,31 +93,26 @@ export function SiteHeader() {
           onClick={() => (open ? closeMenu() : openMenu())}
           aria-expanded={open}
           aria-controls="site-menu"
-          className="flex size-12 items-center justify-center border-[3px] border-foreground bg-foreground text-primary-foreground shadow-hard-sm transition-all hover:-rotate-6 hover:bg-card hover:text-foreground"
+          className={styles.menuButton}
         >
-          {open ? <X className="size-6" aria-hidden="true" /> : <Menu className="size-6" aria-hidden="true" />}
+          {open ? (
+            <X className={styles.menuIcon} aria-hidden="true" />
+          ) : (
+            <Menu className={styles.menuIcon} aria-hidden="true" />
+          )}
           <span className="sr-only">{open ? "メニューを閉じる" : "メニューを開く"}</span>
         </button>
       </div>
 
       {open && (
         <>
-          <div
-            className="fixed inset-0 -z-10 bg-foreground/40 animate-in fade-in duration-200"
-            onClick={() => closeMenu(false)}
-            aria-hidden="true"
-          />
-          <nav
-            id="site-menu"
-            aria-label="メインメニュー"
-            className="absolute right-4 top-20 w-[min(22rem,calc(100vw-2rem))] animate-in fade-in slide-in-from-right-10 duration-300 md:right-6"
-          >
-            <div className="-rotate-1 border-4 border-foreground bg-foreground shadow-hard-lg">
-              <div className="flex items-center justify-between bg-primary-foreground px-4 py-1.5">
-                <p className="font-display text-sm text-foreground">COMMAND</p>
-                <p className="text-xs font-bold text-foreground">{"↑↓ で選択 / Enter で決定"}</p>
+          <div className={styles.backdrop} onClick={() => closeMenu(false)} aria-hidden="true" />
+          <nav id="site-menu" aria-label="メインメニュー" className={styles.menu}>
+            <div className={styles.window}>
+              <div className={styles.titlebar}>
+                <p className={styles.titlebarTitle}>COMMAND</p>
               </div>
-              <ul className="flex flex-col gap-1 p-3" onKeyDown={handleListKeyDown}>
+              <ul className={styles.list} onKeyDown={handleListKeyDown}>
                 {navItems.map((item, index) => {
                   const isSelected = selected === index
                   const isCurrent = activeId === item.id
@@ -139,32 +127,13 @@ export function SiteHeader() {
                         onMouseEnter={() => setSelected(index)}
                         onFocus={() => setSelected(index)}
                         aria-current={isCurrent ? (pageId ? "page" : "location") : undefined}
-                        className={cn(
-                          "clip-slant flex items-center gap-3 px-3 py-2.5 outline-none transition-all duration-150",
-                          isSelected
-                            ? "translate-x-2 bg-primary-foreground text-foreground"
-                            : "text-card",
-                        )}
+                        data-selected={isSelected}
+                        className={styles.item}
                       >
-                        <Play
-                          className={cn(
-                            "size-4 shrink-0 fill-current transition-opacity",
-                            isSelected ? "opacity-100" : "opacity-0",
-                          )}
-                          aria-hidden="true"
-                        />
-                        <span className="font-display text-2xl leading-none">{item.en}</span>
-                        <span className="text-xs font-bold">{item.ja}</span>
-                        {isCurrent && (
-                          <span
-                            className={cn(
-                              "ml-auto px-1.5 text-[10px] font-black tracking-wider",
-                              isSelected ? "bg-foreground text-primary-foreground" : "bg-accent text-accent-foreground",
-                            )}
-                          >
-                            NOW
-                          </span>
-                        )}
+                        <Play className={styles.cursor} aria-hidden="true" />
+                        <span className={styles.itemEn}>{item.en}</span>
+                        <span className={styles.itemJa}>{item.ja}</span>
+                        {isCurrent && <span className={styles.now}>NOW</span>}
                       </Link>
                     </li>
                   )
