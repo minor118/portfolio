@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState, type ReactNode } from "react"
 import { cn } from "@/lib/utils"
+import styles from "./reveal.module.css"
 
 type RevealProps = {
   children: ReactNode
@@ -36,7 +37,7 @@ export function Reveal({ children, className, direction = "left", delay = 0 }: R
       data-visible={visible}
       data-direction={direction}
       style={{ transitionDelay: `${delay}ms` }}
-      className={cn("reveal", className)}
+      className={cn(styles.reveal, className)}
     >
       {children}
     </div>

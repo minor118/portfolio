@@ -1,4 +1,5 @@
 import { Reveal } from "@/components/reveal"
+import styles from "./section-heading.module.css"
 
 type SectionHeadingProps = {
   id: string
@@ -8,14 +9,9 @@ type SectionHeadingProps = {
 
 export function SectionHeading({ id, en, ja }: SectionHeadingProps) {
   return (
-    <Reveal className="flex flex-col items-start gap-3">
-      <p className="-rotate-2 bg-foreground px-3 py-1 text-sm font-bold tracking-widest text-primary-foreground shadow-hard-sm">
-        {ja}
-      </p>
-      <h2
-        id={id}
-        className="font-display -rotate-3 text-6xl leading-none text-foreground text-shadow-hard md:text-8xl"
-      >
+    <Reveal className={styles.heading}>
+      <p className={styles.label}>{ja}</p>
+      <h2 id={id} className={styles.title}>
         {en}
       </h2>
     </Reveal>

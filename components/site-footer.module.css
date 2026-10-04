@@ -1,0 +1,65 @@
+.footer {
+  margin-top: 3rem;
+}
+
+.hazardStripe {
+  height: 1rem;
+  border-block: 4px solid var(--foreground);
+  background-image: var(--pattern-stripes-yellow);
+}
+
+.body {
+  padding: 2rem 1rem;
+  background-color: var(--foreground);
+}
+
+.inner {
+  display: flex;
+  max-width: 72rem;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-inline: auto;
+}
+
+.copyright {
+  font-size: 0.875rem;
+  line-height: 1.4286;
+  font-weight: 700;
+  color: var(--card);
+}
+.copyright small {
+  font-size: 0.875rem;
+  line-height: 1.4286;
+}
+
+.backToTop {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.375rem 1rem;
+  border: 3px solid var(--primary-foreground);
+  font-family: var(--font-display);
+  letter-spacing: 0.01em;
+  font-size: 0.875rem;
+  line-height: 1.4286;
+  color: var(--primary-foreground);
+  transition: all 150ms var(--ease);
+}
+.backToTop:hover {
+  rotate: -2deg;
+  background-color: var(--primary-foreground);
+  color: var(--foreground);
+}
+
+.icon {
+  width: 1rem;
+  height: 1rem;
+}
+
+@media (min-width: 48rem) {
+  .inner {
+    flex-direction: row;
+  }
+}

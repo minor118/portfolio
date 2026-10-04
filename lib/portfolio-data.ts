@@ -1,7 +1,7 @@
 export const profile = {
-  name: "山田 太郎",
-  nameEn: "TARO YAMADA",
-  title: "フロントエンド寄りのフルスタックWebエンジニア",
+  name: "河田 実",
+  nameEn: "MINORU KAWATA",
+  title: "Webエンジニア(フロントエンド〜CMS構築)",
   catchphrase: "見た目も中身も、まるごと作る。",
   intro: [
     "Webフロントエンドを中心に、設計から実装、運用までを一貫して担当するWebエンジニアです。",
@@ -35,12 +35,12 @@ export const skillGroups: SkillGroup[] = [
     ja: "フロントエンド",
     tone: "accent",
     skills: [
-      { name: "HTML", level: 10 },
-      { name: "CSS", level: 9 },
-      { name: "JavaScript", level: 9 },
-      { name: "TypeScript", level: 8 },
-      { name: "React", level: 8 },
-      { name: "Next.js", level: 8 },
+      { name: "HTML", level: 6 },
+      { name: "CSS", level: 6 },
+      { name: "JavaScript", level: 6 },
+      { name: "TypeScript", level: 1 },
+      { name: "React", level: 1 },
+      { name: "Next.js", level: 1 },
     ],
   },
   {
@@ -49,8 +49,9 @@ export const skillGroups: SkillGroup[] = [
     ja: "バックエンド",
     tone: "secondary",
     skills: [
-      { name: "PHP", level: 7 },
-      { name: "Perl", level: 5 },
+      { name: "PHP", level: 5 },
+      { name: "MySQL", level: 3 },
+      { name: "Perl", level: 2 },
     ],
   },
   {
@@ -60,7 +61,7 @@ export const skillGroups: SkillGroup[] = [
     tone: "card",
     skills: [
       { name: "Photoshop", level: 6 },
-      { name: "Figma", level: 7 },
+      { name: "Figma", level: 1 },
     ],
   },
   {
@@ -69,8 +70,9 @@ export const skillGroups: SkillGroup[] = [
     ja: "その他",
     tone: "accent",
     skills: [
-      { name: "Git", level: 8 },
-      { name: "Docker", level: 6 },
+      { name: "Git", level: 1 },
+      { name: "Docker", level: 2 },
+      { name: "Claude Code", level: 1 },
     ],
   },
 ]
@@ -85,46 +87,43 @@ export type Career = {
 
 export const careers: Career[] = [
   {
-    period: "2022年〜現在",
-    company: "株式会社サンプルテック",
-    role: "フロントエンドエンジニア",
+    period: "2018年4月〜2020年3月",
+    company: "新井産業株式会社",
+    role: "営業",
     description:
-      "自社SaaSのフロントエンド開発をリード。デザインシステムの構築から新機能の実装まで担当。",
+      "「折箱（使い捨て弁当容器）」メーカーにて、営業担当として従事。担当は四国・九州全域、一部中国地方の包装資材専門商社",
     tasks: [
-      "Next.js / TypeScript による管理画面のリニューアル",
-      "共通UIコンポーネントの設計と運用",
-      "パフォーマンス改善（LCP 40% 短縮）",
+      "既存商社に対する営業（商品提案・開発、見積作成）",
+      "製造工程管理",
+      "製造補助",
     ],
   },
   {
-    period: "2019年〜2022年",
-    company: "株式会社ウェブサンプル",
+    period: "2020年6月〜現在",
+    company: "株式会社357",
     role: "Webエンジニア",
     description:
       "受託案件を中心に、コーポレートサイトやECサイトの設計・実装を担当。",
     tasks: [
-      "PHP による CMS のカスタマイズ・API 開発",
-      "jQuery から React への段階的な移行",
-      "クライアントとの要件定義・進行管理",
-    ],
-  },
-  {
-    period: "2017年〜2019年",
-    company: "デザインスタジオ サンプル",
-    role: "マークアップエンジニア",
-    description: "Webサイトのコーディングとデザインデータの作成を担当。",
-    tasks: [
-      "HTML / CSS によるレスポンシブ対応のコーディング",
-      "Photoshop を使ったバナー・素材制作",
+      "サイト保守",
+      "LP制作",
+      "CMS構築",
+      "新規サイト作成",
+
     ],
   },
 ]
 
+/**
+ * image: サムネイル画像のパス（任意）。public/works/ に画像を置き、"/works/xxx.png" のように指定してください。
+ * 16:9 の画像を推奨します。未指定の場合は仮置きのサムネイルを表示します。
+ */
 export type Work = {
   title: string
   summary: string
   tech: string[]
   url: string
+  image?: string
 }
 
 export const works: Work[] = [

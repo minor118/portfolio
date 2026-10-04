@@ -18,9 +18,9 @@ const noto = Noto_Sans_JP({
 })
 
 export const metadata: Metadata = {
-  title: 'PORTFOLIO | 山田 太郎 - Webエンジニア',
+  title: 'PORTFOLIO | 河田 実',
   description:
-    'フロントエンド寄りのフルスタックWebエンジニアのポートフォリオ。自己紹介、スキル、経歴、制作実績を掲載しています。',
+    'ポートフォリオ。自己紹介、スキル、経歴、制作実績を掲載しています。',
   generator: 'v0.app',
   icons: {
     icon: [
@@ -39,6 +39,10 @@ export const metadata: Metadata = {
     ],
     apple: '/apple-icon.png',
   },
+  robots: {
+    index: false,
+    follow: false,
+  },
 }
 
 export const viewport: Viewport = {
@@ -52,8 +56,8 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="ja" className={`${dela.variable} ${noto.variable} bg-background`}>
-      <body className="antialiased">
+    <html lang="ja" className={`${dela.variable} ${noto.variable}`} data-scroll-behavior="smooth">
+      <body>
         <BootOverlay />
         {children}
         {process.env.NODE_ENV === 'production' && <Analytics />}
