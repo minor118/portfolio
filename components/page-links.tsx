@@ -9,7 +9,7 @@ type PageLinksProps = {
   label?: string
 }
 
-export function PageLinks({ ids, label = "NEXT STAGE" }: PageLinksProps) {
+export function PageLinks({ ids, label = "LINKS" }: PageLinksProps) {
   const items = navItems.filter((item) => ids.includes(item.id))
 
   return (

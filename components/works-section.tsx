@@ -2,7 +2,7 @@ import Image from "next/image"
 import { ArrowUpRight } from "lucide-react"
 import { Reveal } from "@/components/reveal"
 import { SectionHeading } from "@/components/section-heading"
-import { works } from "@/lib/portfolio-data"
+import { Work, works } from "@/lib/portfolio-data"
 import styles from "./works-section.module.css"
 
 export function WorksSection() {
@@ -12,7 +12,7 @@ export function WorksSection() {
         <SectionHeading id="works-title" en="WORKS" ja="作品・実績" />
 
         <ul className={styles.grid}>
-          {works.map((work, index) => (
+          {works.sort((a, b)=> a.date < b.date ? 1 : -1).map((work, index) => (
             <li key={work.title}>
               <Reveal
                 direction={index % 2 === 0 ? "left" : "right"}
@@ -45,8 +45,22 @@ export function WorksSection() {
                   )}
 
                   <div className={styles.body}>
+                    <p className={styles.date}>{work.date}</p>
                     <h3 className={styles.title}>{work.title}</h3>
                     <p className={styles.summary}>{work.summary}</p>
+                    {work.skills && work.skills.length > 0 && (
+                      <div className={styles.skills}>
+                        <p className={styles.skillsLabel}>NEW SKILLS / 得たスキル</p>
+                        <ul className={styles.skillList}>
+                          {work.skills.map((skill) => (
+                            <li key={skill} className={styles.skill}>
+                              <span className={styles.bullet} aria-hidden="true" />
+                              {skill}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
                     <ul className={styles.techList} aria-label="使用技術">
                       {work.tech.map((tech) => (
                         <li key={tech} className={styles.tech}>
@@ -54,11 +68,13 @@ export function WorksSection() {
                         </li>
                       ))}
                     </ul>
+                    {work.url &&
                     <a href={work.url} target="_blank" rel="noopener noreferrer" className={styles.link}>
                       VIEW SITE
                       <ArrowUpRight className={styles.linkIcon} aria-hidden="true" />
                       <span className="sr-only">{`${work.title}（新しいタブで開く）`}</span>
                     </a>
+                    }
                   </div>
                 </article>
               </Reveal>

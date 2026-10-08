@@ -69,7 +69,7 @@ export function AboutSection() {
           <Reveal direction="right" delay={120}>
             <div className={styles.status}>
               <div className={styles.statusHeader}>
-                <h3 className={styles.statusHeading}>STATUS</h3>
+                <h3 className={styles.statusHeading}>SKILL</h3>
                 <p className={styles.totalLevel}>
                   {"（経験年数）"}
                 </p>
