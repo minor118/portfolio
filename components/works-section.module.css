@@ -11,6 +11,29 @@
   margin-inline: auto;
 }
 
+/* PICKUP / ALL WORKS: a sub-heading followed by its own grid */
+.group {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+.groupHeading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.25rem 0.75rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 4px solid var(--foreground);
+  font-family: var(--font-display);
+  letter-spacing: 0.01em;
+  font-size: 1.5rem;
+  line-height: 1.25;
+  color: var(--foreground);
+}
+.groupHeadingJa {
+  font-size: 0.875rem;
+}
+
 .grid {
   display: grid;
   gap: 2rem;
@@ -98,6 +121,22 @@
   line-height: 1.25;
   color: var(--foreground);
   margin-bottom: 1rem;
+}
+
+/* PICKUP cards: larger title and a badge above the date */
+.card[data-pickup='true'] .title {
+  font-size: 1.5rem;
+}
+.pickupBadge {
+  align-self: flex-start;
+  padding: 0.125rem 0.5rem;
+  margin-bottom: 0.75rem;
+  background-color: var(--foreground);
+  font-family: var(--font-display);
+  letter-spacing: 0.01em;
+  font-size: 0.75rem;
+  line-height: 1.3333;
+  color: var(--primary-foreground);
 }
 
 .summary {
@@ -198,5 +237,9 @@
 @media (min-width: 64rem) {
   .grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  /* PICKUP stays at 2 columns so its cards read larger than the list */
+  .pickupGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }

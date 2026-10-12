@@ -1,6 +1,6 @@
 # PORTFOLIO | 河田 実（MINORU KAWATA）
 
-Webエンジニア（フロントエンド〜CMS構築）河田 実のポートフォリオサイトです。
+Webエンジニア（フロントエンド、CMS構築）河田 実のポートフォリオサイトです。
 
 **公開URL：** https://portfolio-chi-umber-mf0ed3vy0q.vercel.app/
 
