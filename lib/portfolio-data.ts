@@ -113,10 +113,9 @@ export const careers: Career[] = [
 ]
 
 /**
- * image: サムネイル画像のパス（任意）。public/works/ に画像を置き、"/works/xxx.png" のように指定してください。
- * 16:9 の画像を推奨します。未指定の場合は仮置きのサムネイルを表示します。
- * skills: その実績で新しく得たスキル（任意）。1要素が箇条書きの1行になります。未指定の場合は欄ごと非表示です。
- * pickup: true にすると PICKUP エリアに表示され、一覧からは外れます（任意）。
+ * image: サムネイル画像のパス（任意）。public/works/ に画像を置き、"/works/xxx.png" のように指定。16:9 
+ * skills: その実績で新しく得たスキル（任意）。
+ * pickup: true にすると PICKUPに表示（任意）。
  */
 export type Work = {
   title: string
