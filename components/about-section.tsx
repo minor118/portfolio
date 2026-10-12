@@ -47,10 +47,6 @@ export function AboutSection() {
               </div>
               <div className={styles.profileBody}>
                 <div className={styles.identity}>
-                  <div className={styles.avatar} role="img" aria-label="プロフィール画像（仮置き）">
-                    <div className={styles.avatarScanlines} />
-                    <span className={styles.noSignal}>NO SIGNAL</span>
-                  </div>
                   <div className={styles.names}>
                     <p className={styles.name}>{profile.name}</p>
                     <p className={styles.nameEn}>{profile.nameEn}</p>
