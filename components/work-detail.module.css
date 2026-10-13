@@ -1,0 +1,218 @@
+.section {
+  position: relative;
+  padding: 6rem 1rem;
+}
+
+/* Narrower than the works grid so long text stays readable */
+.inner {
+  display: flex;
+  max-width: 56rem;
+  flex-direction: column;
+  gap: 2.5rem;
+  margin-inline: auto;
+}
+
+.back {
+  display: flex;
+  width: fit-content;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.375rem 0.75rem;
+  border: 3px solid var(--foreground);
+  background-color: var(--card);
+  box-shadow: var(--shadow-hard-sm);
+  font-size: 0.875rem;
+  line-height: 1.4286;
+  font-weight: 700;
+  transition: translate 150ms var(--ease);
+}
+.back:hover {
+  translate: -0.25rem 0;
+}
+.backIcon {
+  width: 1rem;
+  height: 1rem;
+}
+
+/* ==========================================================================
+   Header: label, date, title, summary and tech tags
+   ========================================================================== */
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.label {
+  rotate: -2deg;
+  padding: 0.25rem 0.75rem;
+  background-color: var(--foreground);
+  box-shadow: var(--shadow-hard-sm);
+  font-size: 0.875rem;
+  line-height: 1.4286;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--primary-foreground);
+}
+
+.date {
+  font-family: var(--font-display);
+  font-size: 0.875rem;
+}
+
+.title {
+  font-family: var(--font-display);
+  letter-spacing: 0.01em;
+  font-size: 2.25rem;
+  line-height: 1.2;
+  color: var(--foreground);
+  text-shadow: var(--text-shadow-hard);
+  text-wrap: balance;
+  overflow-wrap: anywhere;
+}
+
+.summary {
+  line-height: 1.75;
+  font-weight: 700;
+  color: var(--foreground);
+  text-wrap: pretty;
+}
+
+.techList {
+  composes: techList from './works-section.module.css';
+}
+.tech {
+  composes: tech from './works-section.module.css';
+}
+
+/* ==========================================================================
+   Screenshot; shows the colour bars when no image is set
+   ========================================================================== */
+.screenshot {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border: 4px solid var(--foreground);
+  background-image: var(--pattern-colorbars);
+  box-shadow: var(--shadow-hard);
+}
+.screenshotImage {
+  object-fit: cover;
+}
+.scanlines {
+  composes: scanlines from './works-section.module.css';
+}
+.screenshot[data-has-image='true'] .scanlines {
+  opacity: 0.2;
+}
+
+/* ==========================================================================
+   Body sections
+   ========================================================================== */
+.sections {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.block {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1.25rem;
+  border: 4px solid var(--foreground);
+  background-color: var(--card);
+  box-shadow: var(--shadow-hard);
+}
+
+.blockHeading {
+  padding-bottom: 0.5rem;
+  border-bottom: 4px dashed var(--foreground);
+  font-family: var(--font-display);
+  letter-spacing: 0.01em;
+  font-size: 1.25rem;
+  line-height: 1.25;
+  color: var(--foreground);
+}
+
+.blockBody {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  line-height: 1.875;
+  color: var(--foreground);
+  text-wrap: pretty;
+  overflow-wrap: anywhere;
+}
+
+/* Long raw text (e.g. an AI prompt) in a fixed-height box that scrolls */
+.prompt {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.promptLabel {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.25rem 0.75rem;
+  font-family: var(--font-display);
+  letter-spacing: 0.01em;
+  font-size: 0.875rem;
+  line-height: 1.4286;
+}
+.promptLabelJa {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+.promptText {
+  max-height: 24rem;
+  overflow-y: auto;
+  padding: 1rem;
+  border: 3px solid var(--foreground);
+  background-color: #f1f1f1;
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  line-height: 1.75;
+  color: var(--foreground);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+/* ==========================================================================
+   External links
+   ========================================================================== */
+.links {
+  display: grid;
+  gap: 1rem;
+}
+.link {
+  composes: link from './works-section.module.css';
+  margin-top: 0;
+}
+.linkIcon {
+  composes: linkIcon from './works-section.module.css';
+}
+
+@media (min-width: 40rem) {
+  .links {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 48rem) {
+  .section {
+    padding-block: 8rem;
+  }
+  .title {
+    font-size: 3rem;
+  }
+  .block {
+    padding: 1.75rem;
+  }
+  .blockHeading {
+    font-size: 1.5rem;
+  }
+}
