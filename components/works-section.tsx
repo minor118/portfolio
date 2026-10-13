@@ -1,8 +1,9 @@
 import Image from "next/image"
-import { ArrowUpRight } from "lucide-react"
+import Link from "next/link"
+import { ArrowRight, ArrowUpRight } from "lucide-react"
 import { Reveal } from "@/components/reveal"
 import { SectionHeading } from "@/components/section-heading"
-import { Work, works } from "@/lib/portfolio-data"
+import { Work, personalWorks, works } from "@/lib/portfolio-data"
 import styles from "./works-section.module.css"
 
 type WorkCardProps = {
@@ -10,9 +11,11 @@ type WorkCardProps = {
   index: number
   /** PICKUP エリアがあるときは小見出し（h3）の下に入るため h4 にする */
   titleAs: "h3" | "h4"
+  /** 指定すると VIEW SITE の代わりに詳細ページへのリンクを表示する */
+  detailHref?: string
 }
 
-function WorkCard({ work, index, titleAs: Title }: WorkCardProps) {
+function WorkCard({ work, index, titleAs: Title, detailHref }: WorkCardProps) {
   return (
     <Reveal
       direction={index % 2 === 0 ? "left" : "right"}
@@ -81,7 +84,13 @@ function WorkCard({ work, index, titleAs: Title }: WorkCardProps) {
               </li>
             ))}
           </ul>
-          {work.url && (
+          {detailHref ? (
+            <Link href={detailHref} className={styles.link}>
+              READ MORE
+              <ArrowRight className={styles.linkIcon} aria-hidden="true" />
+              <span className="sr-only">{`${work.title} の詳細を見る`}</span>
+            </Link>
+          ) : work.url && (
             <a href={work.url} target="_blank" rel="noopener noreferrer" className={styles.link}>
               VIEW SITE
               <ArrowUpRight className={styles.linkIcon} aria-hidden="true" />
@@ -99,7 +108,9 @@ export function WorksSection() {
   const pickups = sorted.filter((work) => work.pickup)
   const others = sorted.filter((work) => !work.pickup)
   const hasPickups = pickups.length > 0
-  const titleAs = hasPickups ? "h4" : "h3"
+  const hasPersonal = personalWorks.length > 0
+  const hasGroups = hasPickups || hasPersonal
+  const titleAs = hasGroups ? "h4" : "h3"
 
   return (
     <section id="works" aria-labelledby="works-title" className={styles.section}>
@@ -122,8 +133,29 @@ export function WorksSection() {
           </div>
         )}
 
+        {hasPersonal && (
+          <div className={styles.group}>
+            <h3 className={styles.groupHeading}>
+              PERSONAL
+              <span className={styles.groupHeadingJa}>個人開発</span>
+            </h3>
+            <ul className={`${styles.grid} ${styles.pickupGrid}`}>
+              {personalWorks.map((work, index) => (
+                <li key={work.slug}>
+                  <WorkCard
+                    work={work}
+                    index={index}
+                    titleAs={titleAs}
+                    detailHref={`/works/${work.slug}`}
+                  />
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+
         <div className={styles.group}>
-          {hasPickups && (
+          {hasGroups && (
             <h3 className={styles.groupHeading}>
               ALL WORKS
               <span className={styles.groupHeadingJa}></span>

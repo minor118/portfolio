@@ -1,3 +1,5 @@
+import { portfolioPrompt } from "./portfolio-prompt"
+
 export const profile = {
   name: "河田 実",
   nameEn: "MINORU KAWATA",
@@ -502,6 +504,116 @@ export const works: Work[] = [
     skills: [
       "JSONで持たせたデータをJavaScriptで動的に表示する実装",
       "学生の利用を意識したスマートフォン向けレイアウト",
+    ],
+  },
+]
+
+/**
+ * 個人開発の実績。カードは WORKS の PERSONAL に、詳細は /works/[slug] に表示
+ * slug: 詳細ページの URL（/works/xxx）。半角英数字とハイフンで指定。
+ * repo: GitHub リポジトリの URL（任意）。
+ * sections: 詳細ページの本文。heading が見出し、body は 1 要素 = 1 段落。いくつでも追加できます。
+ * sections[].prompt: 本文の下に、スクロールできる枠で表示する長文（プロンプトなど）（任意）。
+ */
+export type WorkDetailSection = {
+  heading: string
+  body: string[]
+  prompt?: { label: string; text: string }
+}
+
+export type PersonalWork = Work & {
+  slug: string
+  repo?: string
+  sections: WorkDetailSection[]
+}
+
+export const personalWorks: PersonalWork[] = [
+  {
+    slug: "portfolio",
+    title: "ポートフォリオサイト（本サイト）",
+    date: "2026-10-04",
+    summary:
+      "いまご覧いただいているポートフォリオサイトです。業務ではまだ経験の少ない React / Next.js / TypeScript を、実際に使って学ぶことも目的に制作しました。",
+    tech: ["Next.js", "React", "TypeScript", "CSS Modules", "Vercel"],
+    url: "https://portfolio-chi-umber-mf0ed3vy0q.vercel.app/",
+    image: "/works/portfolio.jpg",
+    repo: "https://github.com/minor118/portfolio",
+    sections: [
+      {
+        heading: "制作の背景",
+        body: [
+          "普段の業務では HTML / CSS / JavaScript / PHP / WordPress を中心に、サイト制作・CMS構築・保守を行っています。",
+          "自己紹介・スキル・経歴・制作実績をまとめる場所を作るにあたり、業務ではまだ経験の少ない React / Next.js / TypeScript を実際に使って学ぶことも目的にしました。",
+        ],
+      },
+      {
+        heading: "工夫した点",
+        body: [
+          "経歴・スキル・制作実績などのテキストはすべて1つのデータファイルにまとめ、型定義を付けています。実績を追加するときはデータを1件足すだけで画面に反映されます。",
+          "ブラウン管テレビをモチーフに、初回アクセス時だけテレビの電源を入れたような起動演出を再生しています。ページ移動では再生されないように制御しています。",
+          "スクロールに合わせた表示アニメーションは IntersectionObserver で要素が画面に入ったタイミングを検知し再生しています。",
+        ],
+      },
+      {
+        heading: "AIツールの活用",
+        body: [
+          "v0 でサイトの土台（Next.js プロジェクトの雛形・初期デザイン）を生成し、Claude Code を併用しながら、ページ構成・デザイン・アニメーション・コンテンツを自分で調整しました。",
+          "AIが出力したコードはそのまま使うのではなく、内容を読んで理解したうえで修正・取捨選択しています。AIを使いこなしながら新しい技術をキャッチアップすることも、今回の目的の一つです。",
+          "下記が最初に v0 に入力したプロンプトです。生成された土台をもとに、構成やスタイルの書き方などを調整して現在の形にしています。",
+          "具体的なゲーム名をプロンプトに含んだのは、自身のUIへの関心のルーツとなったゲームだからです。",
+        ],
+        prompt: { label: "v0 に入力したプロンプト", text: portfolioPrompt },
+      },
+    ],
+  },
+  {
+    slug: "kpop-cross",
+    title: "CROSS - K-POP Schedule",
+    date: "2026-05-01",
+    image: "/works/kpop_cross.jpg",
+    summary:
+      "K-POPファン向けのスケジュール管理サイト。お気に入りのアーティストのコンサート・放送・リリース・イベント・誕生日を、タイムラインとカレンダーでまとめて確認できます。",
+    tech: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Vercel","Claude Code","GitHub Actions"],
+    url: "https://www.kpop-cross.net/",
+    sections: [
+      {
+        heading: "制作の背景",
+        body: [
+          "K-POPアーティストのスケジュールは、公式サイト・SNS・ファンコミュニティなど情報源が分かれており、複数のグループを追っていると予定を把握しづらいと感じていました。",
+          "お気に入りのアーティストの予定だけを一か所でまとめて確認できるサイトを、企画から公開まで個人で制作しました。",
+          "最終目標はユーザーが毎日アクセスし、推し活の日常に溶け込むようなサイトになることです。",
+        ],
+      },
+      {
+        heading: "主な機能",
+        body: [
+          "コンサート・放送・リリース・イベント・誕生日の5カテゴリのスケジュールを掲載し、カテゴリボタンで絞り込みができます。現在は11組のグループに対応しています。",
+          "アーティストをお気に入り登録すると、そのアーティストのスケジュールだけが表示されます。表示はタイムライン形式とカレンダー形式を切り替えられます。",
+          "スケジュールをタップすると会場・時間・関連リンクなどの詳細を確認でき、リリース情報からは収録曲・MV・などのディスコグラフィー、メンバーのプロフィールにも進めます。お気に入りのアーティストの新曲リリースやメンバーの誕生日はお知らせとして通知されます。",
+        ],
+      },
+      {
+        heading: "工夫した点",
+        body: [
+          "Claude CodeとGitHub Actionsを組み合わせ、毎日自動でスケジュールデータを取得します。ただし正確性を担保したいため、承認は手作業で行っています。",
+          "同様のサービスは国外に多数あります。本サイトでは「日本人向け」「ビジュアル重視」で差別化を狙っています。「ビジュアル」を重視したい理由は今後ネット検索はAIに置き換わる可能性があり、ただ文字情報をまとめるだけではわざわざアクセスする理由にならないと考えているためです。",
+        ],
+      },
+      {
+        heading: "苦労した点",
+        body: [
+          "正確な情報を提供するため、自身ですべての情報を確認しています（スケジュール、プロフィール、MVなど）。早急なリリースを行い、ユーザーの反応を見たいのですが、MVの設定など自身が情報として満足できる状態にするまでに労力がかかっている点です。",
+        ],
+      },
+      {
+        heading: "今後の課題",
+        body: [
+          "対応グループの追加",
+          "情報取得の正確性の担保",
+          "UI改善（プロフィールページのタブ切り替え、スケジュールの詳細ページをモーダルに変更などを検討中）",
+          "ユーザーの流入経路の確保（まずはnoteからを検討中）",          
+        ],
+      },
     ],
   },
 ]

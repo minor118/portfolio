@@ -14,7 +14,11 @@ const pageIds: Record<string, string> = {
 
 export function SiteHeader() {
   const pathname = usePathname()
-  const pageId = pageIds[pathname]
+  // Detail pages such as /works/xxx belong to their parent page
+  const pagePath = Object.keys(pageIds).find(
+    (path) => pathname === path || pathname.startsWith(`${path}/`),
+  )
+  const pageId = pagePath ? pageIds[pagePath] : undefined
   const [open, setOpen] = useState(false)
   const [sectionId, setSectionId] = useState(navItems[0].id)
   const activeId = pageId ?? sectionId
